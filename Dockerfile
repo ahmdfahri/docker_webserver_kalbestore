@@ -6,10 +6,8 @@ RUN apt-get -y install libapache2-mod-php5 php-gettext php-pear php5 php5-apcu p
 COPY src/ioncube_loader_lin_5.5.so /usr/lib/php5/20121212/
 COPY src/ioncube.ini /etc/php5/mods-available/
 RUN php5enmod ioncube
-mv /etc/php5/apache2/conf.d/20-ioncube.ini /etc/php5/apache2/conf.d/05-ioncube.ini
-mv /etc/php5/cli/conf.d/20-ioncube.ini /etc/php5/cli/conf.d/05-ioncube.ini
-mv /etc/php5/cgi/conf.d/20-ioncube.ini /etc/php5/cgi/conf.d/05-ioncube.ini
-update-rc.d apache2 defaults
+RUN mv /etc/php5/apache2/conf.d/20-ioncube.ini /etc/php5/apache2/conf.d/05-ioncube.ini && mv /etc/php5/cli/conf.d/20-ioncube.ini /etc/php5/cli/conf.d/05-ioncube.ini && mv /etc/php5/cgi/conf.d/20-ioncube.ini /etc/php5/cgi/conf.d/05-ioncube.ini
+RUN update-rc.d apache2 defaults
 RUN php5enmod mcrypt
 RUN a2enmod actions
 RUN a2enmod cache
@@ -26,6 +24,5 @@ RUN a2dissite 000-default.conf
 RUN a2ensite kalbestore.conf
 RUN useradd -m -s /bin/bash webadmin && mkdir -p /home/webadmin/sites/kalbestore && chown -R webadmin. /home/webadmin/sites/kalbestore
 COPY src/envvars /etc/apache2/
-EXPOSE 80 443
-ENTRYPOINT ["/usr/sbin/apache2ctl", "-D", "FOREGROUND"]
+EXPOSE 80
 

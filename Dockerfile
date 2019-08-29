@@ -24,7 +24,7 @@ RUN a2enmod ssl
 COPY src/kalbestore.conf /etc/apache2/sites-available/
 RUN a2dissite 000-default.conf
 RUN a2ensite kalbestore.conf
-RUN useradd webadmin
+RUN useradd -m -s /bin/bash webadmin && mkdir -p /home/webadmin/sites/kalbestore && chown -R webadmin. /home/webadmin/sites/kalbestore
 COPY src/envvars /etc/apache2/
 EXPOSE 80
 

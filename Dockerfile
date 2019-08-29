@@ -2,7 +2,7 @@ FROM ubuntu:14.04
 
 RUN apt-get update
 RUN apt-get -y install curl git
-RUN apt-get -y install libapache2-mod-php5 php-gettext php-pear php5 php5-apcu php5-cgi php5-cli php5-common php5-curl php5-dev php5-gd php5-gmp php5-imagick php5-intl php5-json php5-mcrypt php5-memcache php5-mysql php5-oauth php5-pspell php5-readline php5-redis php5-sqlite php5-xcache php5-xmlrpc php5-xsl pkg-php-tools
+RUN apt-get -y install apache2 libapache2-mod-php5 php-gettext php-pear php5 php5-cgi php5-cli php5-common php5-curl php5-dev php5-gd php5-gmp php5-imagick php5-intl php5-json php5-mcrypt php5-mysql php5-oauth php5-pspell php5-redis php5-sqlite php5-xcache php5-xmlrpc php5-xsl pkg-php-tools
 COPY src/ioncube_loader_lin_5.5.so /usr/lib/php5/20121212/
 COPY src/ioncube.ini /etc/php5/mods-available/
 RUN php5enmod ioncube

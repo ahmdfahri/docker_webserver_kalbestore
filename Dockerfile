@@ -24,5 +24,6 @@ RUN a2dissite 000-default.conf
 RUN a2ensite kalbestore.conf
 RUN useradd -m -s /bin/bash webadmin && mkdir -p /home/webadmin/sites/kalbestore && chown -R webadmin. /home/webadmin/sites/kalbestore
 COPY src/envvars /etc/apache2/
-EXPOSE 80
+EXPOSE 80 443
+ENTRYPOINT ["/usr/sbin/apache2ctl", "-D", "FOREGROUND"]
 
